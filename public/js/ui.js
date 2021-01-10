@@ -6,6 +6,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // add recipe form
   const forms = document.querySelector(".side-form");
   M.Sidenav.init(forms, { edge: "left" });
+  //update recipe form
+  const update = document.querySelector(".update-form");
+  M.Sidenav.init(update, { edge: "right" });
 });
 //render recipe data
 const renderRecipe = (data, id) => {
@@ -16,7 +19,8 @@ const renderRecipe = (data, id) => {
     <div class="recipe-ingredients">${data.ingredients}</div>
   </div>
     <div class="recipe-delete">
-    <i class="material-icons" data-id="${id}">delete_outline</i>
+    <i class="material-icons waves-effect edit-recipe sidenav-trigger" data-target="update-form" data-id="${id}">edit</i>
+    <i class="material-icons waves-effect delete-recipe" data-id="${id}">delete_outline</i>
   </div>
 </div>`;
   recipes.innerHTML += html;

@@ -56,7 +56,7 @@
     <!-- add recipe icon -->
     <div class="center">
       <a
-        class="btn-floating btn-small add-btn sidenav-trigger"
+        class="btn-floating waves-effect btn-small add-btn sidenav-trigger"
         data-target="side-form"
       >
         <i class="material-icons">add</i>
@@ -88,7 +88,37 @@
           <label for="ingredients">Ingredients</label>
         </div>
         <div class="input-field center">
-          <button class="btn-small">Add</button>
+          <button class="btn-small waves-effect">Add</button>
+        </div>
+      </form>
+    </div>
+    <!-- update recipe side nav form -->
+    <div id="update-form" class="sidenav update-form">
+      <form class="add-recipe container section">
+        <h6>New Recipe</h6>
+        <div class="divider"></div>
+        <div class="input-field">
+          <input
+            type="text"
+            name="title"
+            id="title"
+            class="validate"
+            placeholder="e.g. Biryani"
+          />
+          <label for="title">Recipe Title</label>
+        </div>
+        <div class="input-field">
+          <input
+            type="text"
+            name="ingredients"
+            id="ingredients"
+            class="validate"
+            placeholder="e.g Cooked rice,onions,ginger..."
+          />
+          <label for="ingredients">Ingredients</label>
+        </div>
+        <div class="input-field center">
+          <button class="btn-small waves-effect update-btn">Update</button>
         </div>
       </form>
     </div>

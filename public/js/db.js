@@ -26,7 +26,8 @@ db.collection("recipes").onSnapshot((snapshot) => {
 });
 
 //add new recipe
-const form = document.querySelector("form");
+const form = document.querySelector(".add-recipe");
+const updateForm = document.querySelector("update-form");
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const recipe = {
@@ -43,9 +44,13 @@ form.addEventListener("submit", (evt) => {
 //delete a recipe
 const recipeContainer = document.querySelector(".recipes");
 recipeContainer.addEventListener("click", (evt) => {
-  //   console.log(evt);
-  if (evt.target.tagName === "I") {
+  if (evt.target.classList.contains("delete-recipe")) {
     const id = evt.target.getAttribute("data-id");
     db.collection("recipes").doc(id).delete();
+  } else if (evt.target.classList.contains("edit-recipe")) {
+    console.log(evt.target.getAttribute("data-id"));
+    const updateBtn = document.querySelector(".update-btn");
+    const dataId = evt.target.getAttribute("data-id");
+    updateBtn.id = dataId;
   }
 });
