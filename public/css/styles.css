@@ -72,11 +72,14 @@ nav .sidenav-trigger {
 .add-btn {
   background-color: var(--title-clr) !important;
 }
+.update-btn {
+  background-color: var(--title-clr) !important;
+}
 input {
   box-shadow: none !important;
   -webkit-box-shadow: none !important;
 }
-.side-form button {
+.add-modal button {
   background-color: var(--title-clr) !important;
   box-shadow: 1px 1px 3px rgba(90, 90, 90, 0.2);
 }

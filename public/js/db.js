@@ -22,12 +22,15 @@ db.collection("recipes").onSnapshot((snapshot) => {
       //remove the document data from the web page
       removeRecipe(change.doc.id);
     }
+    if (change.type === "modified") {
+      //update the document data
+      updateRecipe(change.doc.data(), change.doc.id);
+    }
   });
 });
 
 //add new recipe
 const form = document.querySelector(".add-recipe");
-const updateForm = document.querySelector("update-form");
 form.addEventListener("submit", (evt) => {
   evt.preventDefault();
   const recipe = {
@@ -44,13 +47,34 @@ form.addEventListener("submit", (evt) => {
 //delete a recipe
 const recipeContainer = document.querySelector(".recipes");
 recipeContainer.addEventListener("click", (evt) => {
+  const id = evt.target.getAttribute("data-id");
   if (evt.target.classList.contains("delete-recipe")) {
-    const id = evt.target.getAttribute("data-id");
     db.collection("recipes").doc(id).delete();
   } else if (evt.target.classList.contains("edit-recipe")) {
-    console.log(evt.target.getAttribute("data-id"));
-    const updateBtn = document.querySelector(".update-btn");
-    const dataId = evt.target.getAttribute("data-id");
-    updateBtn.id = dataId;
+    // console.log(evt.target.getAttribute("data-id"));
+    document.querySelector(".update-form").setAttribute("data-id", id);
+    // const updateBtn = document.querySelector(".update-btn");
+    const title = document.querySelector(`div[data-id="${id}"] .recipe-title`)
+      .textContent;
+    const ingredients = document.querySelector(
+      `div[data-id="${id}"] .recipe-ingredients`
+    ).textContent;
+    document.querySelector(".update-title").value = title;
+    document.querySelector(".update-ingredients").value = ingredients;
   }
+});
+
+// update recipe
+const updateForm = document.querySelector(".update-recipe");
+updateForm.addEventListener("submit", (evt) => {
+  evt.preventDefault();
+  const dataId = document.querySelector(".update-form").getAttribute("data-id");
+  const recipe = {
+    title: updateForm.title.value,
+    ingredients: updateForm.ingredients.value,
+  };
+  db.collection("recipes")
+    .doc(dataId)
+    .update(recipe)
+    .catch((err) => console.log(err));
 });

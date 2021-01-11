@@ -56,14 +56,14 @@
     <!-- add recipe icon -->
     <div class="center">
       <a
-        class="btn-floating waves-effect btn-small add-btn sidenav-trigger"
-        data-target="side-form"
+        href="#add-modal1"
+        class="btn-floating waves-effect btn-small add-btn modal-trigger"
       >
         <i class="material-icons">add</i>
       </a>
     </div>
     <!-- add recipe side nav form -->
-    <div id="side-form" class="sidenav side-form">
+    <div id="add-modal1" class="modal add-modal">
       <form class="add-recipe container section">
         <h6>New Recipe</h6>
         <div class="divider"></div>
@@ -74,6 +74,7 @@
             id="title"
             class="validate"
             placeholder="e.g. Biryani"
+            required
           />
           <label for="title">Recipe Title</label>
         </div>
@@ -84,26 +85,29 @@
             id="ingredients"
             class="validate"
             placeholder="e.g Cooked rice,onions,ginger..."
+            required
           />
           <label for="ingredients">Ingredients</label>
         </div>
         <div class="input-field center">
           <button class="btn-small waves-effect">Add</button>
+          <a href="#!" class="btn-small waves-effect modal-close">Close</a>
         </div>
       </form>
     </div>
     <!-- update recipe side nav form -->
-    <div id="update-form" class="sidenav update-form">
-      <form class="add-recipe container section">
-        <h6>New Recipe</h6>
+    <div id="update-form1" class="modal update-form">
+      <form class="update-recipe container section">
+        <h6>Update Recipe</h6>
         <div class="divider"></div>
         <div class="input-field">
           <input
             type="text"
             name="title"
             id="title"
-            class="validate"
+            class="validate update-title"
             placeholder="e.g. Biryani"
+            required
           />
           <label for="title">Recipe Title</label>
         </div>
@@ -112,13 +116,17 @@
             type="text"
             name="ingredients"
             id="ingredients"
-            class="validate"
+            class="validate update-ingredients"
             placeholder="e.g Cooked rice,onions,ginger..."
+            required
           />
           <label for="ingredients">Ingredients</label>
         </div>
         <div class="input-field center">
-          <button class="btn-small waves-effect update-btn">Update</button>
+          <button class="btn-small waves-effect update-btn modal-close">
+            Update
+          </button>
+          <a href="#!" class="btn-small waves-effect modal-close">Close</a>
         </div>
       </form>
     </div>
