@@ -38,32 +38,122 @@
     <!-- side navigation bar -->
     <ul id="side-menu" class="sidenav side-menu">
       <li><a class="subheader">RECIPESCOUNTER</a></li>
-      <li><a href="/" class="waves-effect">Home</a></li>
-      <li><a href="/pages/about.html" class="waves-effect">About</a></li>
-      <li>
+      <li class="logged-out" style="display: none">
+        <a
+          href="#"
+          class="waves-effect modal-trigger"
+          data-target="modal-signup"
+          ><i class="material-icons">person_add</i> Sign up</a
+        >
+      </li>
+
+      <li class="logged-out" style="display: none">
+        <a href="#" class="waves-effect modal-trigger" data-target="modal-login"
+          ><i class="material-icons">person_pin</i> Login</a
+        >
+      </li>
+      <li class="logged-in sidenav-close" style="display: none">
+        <a
+          href="#"
+          class="waves-effect modal-trigger"
+          data-target="modal-account"
+        >
+          <i class="material-icons">account_circle</i> Account Info</a
+        >
+      </li>
+      <li class="logged-in" style="display: none">
         <div class="divider"></div>
       </li>
-      <li>
+      <li class="logged-in" style="display: none">
+        <a href="/" class="waves-effect"
+          ><i class="material-icons">home</i> Home</a
+        >
+      </li>
+      <li class="logged-in" style="display: none">
+        <a href="/pages/about.html" class="waves-effect"
+          ><i class="material-icons">info_outline</i> About</a
+        >
+      </li>
+      <li class="logged-in" style="display: none">
         <a href="/pages/contact.html" class="waves-effect"
           ><i class="material-icons">mail_outline</i>Contact</a
         >
       </li>
+      <li class="logged-in" style="display: none">
+        <div class="divider"></div>
+      </li>
+      <li class="logged-in" style="display: none">
+        <a href="#" class="waves-effect" id="logout"
+          ><i class="material-icons">exit_to_app</i> Logout</a
+        >
+      </li>
     </ul>
-    <!-- recipes -->
-    <div class="recipes container grey-text text-darken-1">
-      <h6 class="center">Recipes</h6>
+
+    <!-- SIGN UP MODAL -->
+    <div id="modal-signup" class="modal">
+      <div class="modal-content">
+        <h4>Sign up</h4>
+        <form id="signup-form">
+          <div class="input-field">
+            <input type="email" id="signup-email" required />
+            <label for="signup-email">Email address</label>
+          </div>
+          <div class="input-field">
+            <input type="password" id="signup-password" required />
+            <label for="signup-password">Choose password</label>
+          </div>
+          <div class="input-field">
+            <input type="text" id="signup-bio" required />
+            <label for="signup-bio">One Line Bio</label>
+          </div>
+          <button class="btn orange darken-4 z-depth-0">Sign up</button>
+          <p class="error pink-text center-align"></p>
+        </form>
+      </div>
     </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="modal-login" class="modal">
+      <div class="modal-content">
+        <h4>Login</h4>
+        <form id="login-form">
+          <div class="input-field">
+            <input type="email" id="login-email" required />
+            <label for="login-email">Email address</label>
+          </div>
+          <div class="input-field">
+            <input type="password" id="login-password" required />
+            <label for="login-password">Your password</label>
+          </div>
+          <button class="btn orange darken-4 z-depth-0">Login</button>
+          <p class="error pink-text center-align"></p>
+        </form>
+      </div>
+    </div>
+
+    <!-- ACCOUNT MODAL -->
+    <div id="modal-account" class="modal">
+      <div class="modal-content center-align">
+        <h4>Account details</h4>
+        <br />
+        <div class="account-details"></div>
+      </div>
+    </div>
+
+    <!-- recipes -->
+    <div class="recipes container grey-text text-darken-1"></div>
     <!-- add recipe icon -->
-    <div class="center">
+    <div class="center logged-in">
       <a
-        href="#add-modal1"
+        href="#"
         class="btn-floating waves-effect btn-small add-btn modal-trigger"
+        data-target="add-modal"
       >
         <i class="material-icons">add</i>
       </a>
     </div>
     <!-- add recipe side nav form -->
-    <div id="add-modal1" class="modal add-modal">
+    <div id="add-modal" class="modal add-modal">
       <form class="add-recipe container section">
         <h6>New Recipe</h6>
         <div class="divider"></div>
@@ -90,7 +180,7 @@
           <label for="ingredients">Ingredients</label>
         </div>
         <div class="input-field center">
-          <button class="btn-small waves-effect">Add</button>
+          <button class="btn-small waves-effect modal-close">Add</button>
           <a href="#!" class="btn-small waves-effect modal-close">Close</a>
         </div>
       </form>
@@ -104,7 +194,7 @@
           <input
             type="text"
             name="title"
-            id="title"
+            id="uptitle"
             class="validate update-title"
             placeholder="e.g. Biryani"
             required
@@ -115,7 +205,7 @@
           <input
             type="text"
             name="ingredients"
-            id="ingredients"
+            id="upingredients"
             class="validate update-ingredients"
             placeholder="e.g Cooked rice,onions,ginger..."
             required
@@ -133,6 +223,7 @@
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.0/firebase-auth.js"></script>
 
     <!-- TODO: Add SDKs for Firebase products that you want to use
      https://firebase.google.com/docs/web/setup#available-libraries -->
@@ -154,6 +245,7 @@
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
       const db = firebase.firestore();
+      const auth = firebase.auth();
     </script>
     <script src="/js/app.js"></script>
     <script src="/js/db.js"></script>

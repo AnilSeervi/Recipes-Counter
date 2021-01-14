@@ -89,3 +89,26 @@ form .input-field {
 i[data-target="side-menu"] {
   cursor: pointer;
 }
+.side-menu {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+.side-menu li:nth-child(9) {
+  margin-bottom: auto;
+}
+
+.entry-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70vh;
+}
+.entry-page h5 {
+  margin-bottom: 30px;
+}
+.entry-page a + a {
+  margin-left: 30px;
+}

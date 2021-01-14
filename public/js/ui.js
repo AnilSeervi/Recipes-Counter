@@ -1,14 +1,39 @@
 const recipes = document.querySelector(".recipes");
+const loggedOutLinks = document.querySelectorAll(".logged-out");
+const loggedInLinks = document.querySelectorAll(".logged-in");
+const accountDetails = document.querySelector(".account-details");
+
+const setupUI = (user) => {
+  if (user) {
+    //acc info
+    db.collection("users")
+      .doc(user.uid)
+      .get()
+      .then((doc) => {
+        const html = `
+      <div>Logged in as ${user.email}</div>
+      <div>${doc.data().bio}</div>
+      `;
+        accountDetails.innerHTML = html;
+      });
+    //toggle UI elements
+    loggedInLinks.forEach((item) => (item.style.display = "block"));
+    loggedOutLinks.forEach((item) => (item.style.display = "none"));
+  } else {
+    //hide acc info
+    accountDetails.innerHTML = "";
+    //toggle UI elements
+    loggedInLinks.forEach((item) => (item.style.display = "none"));
+    loggedOutLinks.forEach((item) => (item.style.display = "block"));
+  }
+};
 document.addEventListener("DOMContentLoaded", function () {
   // nav menu
   const menus = document.querySelector(".side-menu");
   M.Sidenav.init(menus, { edge: "right" });
-  // add recipe form
-  const forms = document.querySelector(".add-modal");
-  M.Modal.init(forms, { opacity: 0.5 });
-  //update recipe form
-  const update = document.querySelector(".update-form");
-  M.Modal.init(update, { opacity: 0.5 });
+  // modals
+  const modals = document.querySelectorAll(".modal");
+  M.Modal.init(modals);
 });
 //render recipe data
 const renderRecipe = (data, id) => {
@@ -44,4 +69,28 @@ const updateRecipe = (data, id) => {
     <i class="material-icons waves-effect delete-recipe" data-id="${id}">delete_outline</i>
   </div>`;
   recipe.innerHTML = html;
+};
+
+//enter recipes
+const enterRecipes = () => {
+  recipes.innerHTML = `<h6 class="center">Recipes</h6>`;
+};
+//clear recipes
+const clearRecipes = () => {
+  recipes.innerHTML = `
+  <div class="center entry-page">
+  <h5 class="center"> Login to View Recipes</h5>
+  <div>
+  <a
+  href="#"
+  class="waves-effect modal-trigger btn"
+  data-target="modal-signup"
+  ><i class="material-icons right">person_add</i> Sign up</a
+>
+<a href="#" class="waves-effect modal-trigger btn" data-target="modal-login"
+><i class="material-icons right">person_pin</i> Login</a
+>
+</div>
+</div>
+  `;
 };
