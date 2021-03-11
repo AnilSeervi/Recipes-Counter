@@ -25,6 +25,9 @@ nav .sidenav-trigger {
   margin-top: 20px;
 }
 .card-panel.recipe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-radius: 8px;
   padding: 10px;
   box-shadow: 0 1px 3px rgba(90, 90, 90, 0.1);
@@ -39,16 +42,17 @@ nav .sidenav-trigger {
 }
 .recipe-details {
   grid-area: details;
-  margin-top: 6px;
 }
 .recipe-delete {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
   grid-area: delete;
-  position: absolute;
-  bottom: 0;
-  right: 0;
+  justify-self: flex-end;
 }
 .recipe-delete i {
+  position: relative;
   background-color: #f5f5f5;
   border-radius: 50%;
   cursor: pointer;
@@ -56,7 +60,7 @@ nav .sidenav-trigger {
   font-size: 18px;
 }
 .recipe-delete i + i {
-  margin-left: 5px;
+  margin-top: 0.7em;
 }
 .recipe-delete i:hover {
   background-color: #cccccc;
@@ -111,4 +115,12 @@ i[data-target="side-menu"] {
 }
 .entry-page a + a {
   margin-left: 30px;
+}
+@media (min-width: 700px) {
+  #toast-container {
+    top: auto !important;
+    left: auto !important;
+    right: 7vh;
+    bottom: 5vh;
+  }
 }

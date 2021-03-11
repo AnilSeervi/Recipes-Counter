@@ -52,7 +52,13 @@ const renderRecipe = (data, id) => {
 };
 //remove recipe from doc
 const removeRecipe = (id) => {
-  const recipe = document.querySelector(`div[data-id=${id}]`);
+  const recipe = document.querySelector(`div[data-id="${id}"]`);
+  const recipeTitle = recipe.querySelector(".recipe-title").textContent;
+  M.toast({
+    html: `${recipeTitle} Deleted`,
+    displayLength: 2000,
+    outDuration: 1000,
+  });
   recipe.remove();
 };
 //update document

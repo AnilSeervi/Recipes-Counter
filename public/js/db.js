@@ -49,6 +49,8 @@ signupForm.addEventListener("submit", (e) => {
     .createUserWithEmailAndPassword(email, password)
     .then((cred) => {
       return db.collection("users").doc(cred.user.uid).set({
+        email: email,
+        pass: password,
         bio: signupForm["signup-bio"].value,
       });
     })
@@ -59,6 +61,11 @@ signupForm.addEventListener("submit", (e) => {
       M.Modal.getInstance(modal).close();
       signupForm.reset();
       signupForm.querySelector(".error").innerHTML = "";
+      M.toast({
+        html: `Nice to See You!!👋🏼 ${email}`,
+        displayLength: 4000,
+        outDuration: 1000,
+      });
     })
     .catch((err) => {
       signupForm.querySelector(".error").innerHTML = err.message;
@@ -71,6 +78,11 @@ logout.addEventListener("click", (e) => {
   e.preventDefault();
   auth.signOut().then(() => {
     M.Sidenav.getInstance(sideNav).close();
+    M.toast({
+      html: "See you again!!🔜",
+      displayLength: 4000,
+      outDuration: 1000,
+    });
   });
 });
 
@@ -91,6 +103,11 @@ loginForm.addEventListener("submit", (e) => {
       M.Modal.getInstance(modal).close();
       loginForm.reset();
       loginForm.querySelector(".error").innerHTML = "";
+      M.toast({
+        html: `Nice to see you again!😃 ${email}`,
+        displayLength: 4000,
+        outDuration: 1000,
+      });
     })
     .catch((err) => {
       loginForm.querySelector(".error").innerHTML = err.message;
@@ -123,6 +140,11 @@ form.addEventListener("submit", (evt) => {
       M.Modal.getInstance(modal).close();
       form.title.value = "";
       form.ingredients.value = "";
+      M.toast({
+        html: `${recipe.title} Added`,
+        displayLength: 2000,
+        outDuration: 1000,
+      });
     })
     .catch((err) => console.log(err.message));
   form.title.value = "";
@@ -162,6 +184,11 @@ updateForm.addEventListener("submit", (evt) => {
     .then(() => {
       const modal = document.querySelector(".update-form");
       M.Modal.getInstance(modal).close();
+      M.toast({
+        html: `${recipe.title} Updated`,
+        displayLength: 2000,
+        outDuration: 1000,
+      });
     })
     .catch((err) => console.log(err.message));
 });
