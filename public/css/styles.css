@@ -22,6 +22,9 @@ nav .sidenav-trigger {
 }
 /* recipe styles */
 .recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 0 20px;
   margin-top: 20px;
 }
 .card-panel.recipe {
@@ -33,6 +36,7 @@ nav .sidenav-trigger {
   box-shadow: 0 1px 3px rgba(90, 90, 90, 0.1);
   display: grid;
   grid-template-columns: 1fr 6fr 1fr;
+  grid-template-rows: 1fr;
   grid-template-areas: "image details delete";
   position: relative;
 }
@@ -46,10 +50,10 @@ nav .sidenav-trigger {
 .recipe-delete {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
   align-items: center;
   grid-area: delete;
   justify-self: flex-end;
+  align-self: flex-end;
 }
 .recipe-delete i {
   position: relative;
@@ -73,6 +77,12 @@ nav .sidenav-trigger {
   font-size: 0.8em;
 }
 /* form styles */
+.add-button {
+  position: fixed;
+  bottom: 6%;
+  right: 5%;
+  z-index: 20;
+}
 .add-btn {
   background-color: var(--title-clr) !important;
 }
@@ -108,7 +118,7 @@ i[data-target="side-menu"] {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 80vh;
 }
 .entry-page h5 {
   margin-bottom: 30px;
@@ -119,8 +129,14 @@ i[data-target="side-menu"] {
 @media (min-width: 700px) {
   #toast-container {
     top: auto !important;
-    left: auto !important;
-    right: 7vh;
+    right: auto !important;
+    left: 7vh;
     bottom: 5vh;
+  }
+}
+@media (max-width: 700px) {
+  .add-button {
+    bottom: 5%;
+    right: 10%;
   }
 }

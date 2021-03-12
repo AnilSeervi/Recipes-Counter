@@ -76,15 +76,17 @@ const updateRecipe = (data, id) => {
   </div>`;
   recipe.innerHTML = html;
 };
-
+const enterRecipe = document.querySelector(".enter-recipe");
+const signupPage = document.querySelector(".signup-page");
 //enter recipes
 const enterRecipes = () => {
-  recipes.innerHTML = `<h6 class="center">Recipes</h6>`;
+  enterRecipe.innerHTML = `<h6 class="center">Recipes</h6>`;
+  signupPage.innerHTML = "";
 };
 //clear recipes
 const clearRecipes = () => {
-  recipes.innerHTML = `
-  <div class="center entry-page">
+  signupPage.innerHTML = `
+  <div class="entry-page center">
   <h5 class="center"> Login to View Recipes</h5>
   <div>
   <a
@@ -99,4 +101,6 @@ const clearRecipes = () => {
 </div>
 </div>
   `;
+  recipes.innerHTML = "";
+  enterRecipe.innerHTML = "";
 };
