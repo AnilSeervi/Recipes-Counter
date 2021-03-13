@@ -5,6 +5,7 @@ auth.onAuthStateChanged((user) => {
     //real-time listener
     db.collection("recipes").onSnapshot(
       (snapshot) => {
+        changeSize(snapshot.size);
         //   console.log(snapshot.docChanges());
         snapshot.docChanges().forEach((change) => {
           // console.log(change, change.doc.data(), change.doc.id);
@@ -26,7 +27,6 @@ auth.onAuthStateChanged((user) => {
         console.log(err.message);
       }
     );
-
     setupUI(user);
   } else {
     clearRecipes();
@@ -157,6 +157,13 @@ const updateForm = document.querySelector(".update-recipe");
 recipeContainer.addEventListener("click", (evt) => {
   const id = evt.target.getAttribute("data-id");
   if (evt.target.classList.contains("delete-recipe")) {
+    const recipe = document.querySelector(`div[data-id="${id}"]`);
+    const recipeTitle = recipe.querySelector(".recipe-title").textContent;
+    M.toast({
+      html: `${recipeTitle} Deleted`,
+      displayLength: 2000,
+      outDuration: 1000,
+    });
     db.collection("recipes").doc(id).delete();
   } else if (evt.target.classList.contains("edit-recipe")) {
     document.querySelector(".update-form").setAttribute("data-id", id);

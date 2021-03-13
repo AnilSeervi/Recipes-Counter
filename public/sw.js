@@ -1,5 +1,5 @@
-const staticCacheName = "site-static-v6";
-const dynamicCacheName = "site-dynamic-v6";
+const staticCacheName = "site-static-v7";
+const dynamicCacheName = "site-dynamic-v7";
 const assets = [
   "/",
   "/index.html",
@@ -8,7 +8,7 @@ const assets = [
   "/js/materialize.min.js",
   "/css/styles.css",
   "css/materialize.min.css",
-  "/img/dish.png",
+  "/img/recipe.webp",
   "/img/icons/apple-touch-icon.png",
   "/img/icons/favicon.ico",
   "/img/icons/icon-16x16.png",

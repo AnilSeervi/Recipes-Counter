@@ -37,15 +37,29 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 //render recipe data
 const renderRecipe = (data, id) => {
-  const html = `<div class="card-panel recipe white row" data-id="${id}">
-  <img src="/img/dish.png" alt="recipe thumbnail" />
-  <div class="recipe-details">
-    <div class="recipe-title">${data.title}</div>
-    <div class="recipe-ingredients">${data.ingredients}</div>
+  const html = `<div class="card sticky-action recipe" data-id="${id}">
+  <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="./img/recipe.webp" />
   </div>
-    <div class="recipe-delete">
-    <i class="material-icons waves-effect edit-recipe modal-trigger" data-target="update-form1" data-id="${id}">edit</i>
-    <i class="material-icons waves-effect delete-recipe" data-id="${id}">delete_outline</i>
+  <div class="card-content">
+  <i class="material-icons activator right">more_vert</i>
+    <span class="card-title recipe-title grey-text text-darken-4"
+      >${data.title}</span>
+    <span class="activator light-blue-text darken-3">See Ingredients</span>
+  </div>
+  <div class="card-action">
+    <a
+      class="waves-effect waves-light edit-recipe modal-trigger"
+      data-id="${id}"
+      data-target="update-form1"
+      >Update</a>
+    <a class="waves-effect waves-light delete-recipe" data-id="${id}">Delete</a>
+  </div>
+  <div class="card-reveal">
+  <i class="material-icons card-title right">close</i>
+    <span class="card-title recipe-title grey-text text-darken-4"
+      >${data.title}</span>
+    <p class="recipe-ingredients">${data.ingredients}</p>
   </div>
 </div>`;
   recipes.innerHTML += html;
@@ -53,26 +67,34 @@ const renderRecipe = (data, id) => {
 //remove recipe from doc
 const removeRecipe = (id) => {
   const recipe = document.querySelector(`div[data-id="${id}"]`);
-  const recipeTitle = recipe.querySelector(".recipe-title").textContent;
-  M.toast({
-    html: `${recipeTitle} Deleted`,
-    displayLength: 2000,
-    outDuration: 1000,
-  });
   recipe.remove();
 };
 //update document
 const updateRecipe = (data, id) => {
   const recipe = document.querySelector(`div[data-id="${id}"]`);
   const html = `
-  <img src="/img/dish.png" alt="recipe thumbnail" />
-  <div class="recipe-details">
-    <div class="recipe-title">${data.title}</div>
-    <div class="recipe-ingredients">${data.ingredients}</div>
+  <div class="card-image waves-effect waves-block waves-light">
+    <img class="activator" src="./img/recipe.webp" />
   </div>
-    <div class="recipe-delete">
-    <i class="material-icons waves-effect edit-recipe modal-trigger" data-target="update-form1" data-id="${id}">edit</i>
-    <i class="material-icons waves-effect delete-recipe" data-id="${id}">delete_outline</i>
+  <div class="card-content">
+  <i class="material-icons activator right">more_vert</i>
+    <span class="card-title recipe-title grey-text text-darken-4"
+      >${data.title}</span>
+    <span class="activator light-blue-text darken-3">See Ingredients</span>
+  </div>
+  <div class="card-action">
+    <a
+      class="waves-effect waves-light edit-recipe modal-trigger"
+      data-id="${id}"
+      data-target="update-form1"
+      >Update</a>
+    <a class="waves-effect waves-light delete-recipe" data-id="${id}">Delete</a>
+  </div>
+  <div class="card-reveal">
+  <i class="material-icons card-title right">close</i>
+    <span class="card-title recipe-title grey-text text-darken-4"
+      >${data.title}</span>
+    <p class="recipe-ingredients">${data.ingredients}</p>
   </div>`;
   recipe.innerHTML = html;
 };
@@ -80,8 +102,11 @@ const enterRecipe = document.querySelector(".enter-recipe");
 const signupPage = document.querySelector(".signup-page");
 //enter recipes
 const enterRecipes = () => {
-  enterRecipe.innerHTML = `<h6 class="center">Recipes</h6>`;
+  enterRecipe.innerHTML = ` <span class="new badge" data-badge-caption="Recipes"></span>`;
   signupPage.innerHTML = "";
+};
+const changeSize = (size) => {
+  enterRecipe.querySelector("span").textContent = size;
 };
 //clear recipes
 const clearRecipes = () => {
