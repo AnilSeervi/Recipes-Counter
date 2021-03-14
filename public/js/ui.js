@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const renderRecipe = (data, id) => {
   const html = `<div class="card sticky-action recipe" data-id="${id}">
   <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" src="https://source.unsplash.com/300x150/weekly?${data.title
+    <img class="activator" src="https://source.unsplash.com/400x200/weekly?${data.title
       .split(" ")
       .join(",")}" onerror="this.src='./img/recipe.webp'" />
   </div>
