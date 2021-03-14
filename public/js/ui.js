@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded", function () {
 const renderRecipe = (data, id) => {
   const html = `<div class="card sticky-action recipe" data-id="${id}">
   <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" src="./img/recipe.webp" />
+    <img class="activator" src="https://source.unsplash.com/300x150/weekly?${data.title
+      .split(" ")
+      .join(",")}" onerror="this.src='./img/recipe.webp'" />
   </div>
   <div class="card-content">
   <i class="material-icons activator right">more_vert</i>
@@ -72,37 +74,16 @@ const removeRecipe = (id) => {
 //update document
 const updateRecipe = (data, id) => {
   const recipe = document.querySelector(`div[data-id="${id}"]`);
-  const html = `
-  <div class="card-image waves-effect waves-block waves-light">
-    <img class="activator" src="./img/recipe.webp" />
-  </div>
-  <div class="card-content">
-  <i class="material-icons activator right">more_vert</i>
-    <span class="card-title recipe-title grey-text text-darken-4"
-      >${data.title}</span>
-    <span class="activator light-blue-text darken-3">See Ingredients</span>
-  </div>
-  <div class="card-action">
-    <a
-      class="waves-effect waves-light edit-recipe modal-trigger"
-      data-id="${id}"
-      data-target="update-form1"
-      >Update</a>
-    <a class="waves-effect waves-light delete-recipe" data-id="${id}">Delete</a>
-  </div>
-  <div class="card-reveal">
-  <i class="material-icons card-title right">close</i>
-    <span class="card-title recipe-title grey-text text-darken-4"
-      >${data.title}</span>
-    <p class="recipe-ingredients">${data.ingredients}</p>
-  </div>`;
-  recipe.innerHTML = html;
+  const recipeTitle = recipe.querySelectorAll(".recipe-title");
+  const recipeIngredients = recipe.querySelector(".recipe-ingredients");
+  recipeIngredients.textContent = data.ingredients;
+  recipeTitle.forEach((title) => (title.textContent = data.title));
 };
 const enterRecipe = document.querySelector(".enter-recipe");
 const signupPage = document.querySelector(".signup-page");
 //enter recipes
 const enterRecipes = () => {
-  enterRecipe.innerHTML = ` <span class="new badge" data-badge-caption="Recipes"></span>`;
+  enterRecipe.innerHTML = `<span class="new badge" data-badge-caption="Recipes"></span>`;
   signupPage.innerHTML = "";
 };
 const changeSize = (size) => {
@@ -112,7 +93,7 @@ const changeSize = (size) => {
 const clearRecipes = () => {
   signupPage.innerHTML = `
   <div class="entry-page center">
-  <h5 class="center"> Login to View Recipes</h5>
+  <h5 class="center grey-text"> Login to View Recipes</h5>
   <div>
   <a
   href="#"
